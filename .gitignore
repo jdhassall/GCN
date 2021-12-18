@@ -1,6 +1,7 @@
 # unneeded scripts
 .possibly_useful_code.js
-
+.search_filter(35)
+search_filter(35)
 # Logs
 logs
 *.log

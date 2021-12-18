@@ -26,7 +26,21 @@ function extractReleventData(data) {
   return { nextPageToken, retrievedDataArr };
 }
 
+
+function formatDate(dateToBeFormatted) {
+  try{
+    var date = new Date(dateToBeFormatted) // formated_Date - SDK returned date
+    var day = ("0" + date.getDate()).slice(-2);
+    date = `${date.getFullYear()}:${("0" + (date.getMonth() + 1)).slice(-2)}:${day} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    return date;
+  } catch (err) {
+    console.log(err)
+    return false; // MAKE SURE TO USE THESE
+  };
+};
+
 module.exports = {
+  formatDate,
   filterResults,
   extractReleventData,
 }

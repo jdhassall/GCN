@@ -1,11 +1,10 @@
 const router = require('express').Router();
-const { google } = require('googleapis');
 const { storeVideoData } = require('../helpers/database_operations');
 const fetch = require("node-fetch");
 const { filterResults, extractRelevantData } = require('../helpers/helper_functions');
 require('dotenv').config();
 
-router.get('/', retrieveYoutubeData);
+router.get('/', retrieveYoutubeData); // GET is incorrect! Change this! More likely put or post or something
 
 // refactor to seperate out functionality
 // Make sure to alter this to return data for the second channel
