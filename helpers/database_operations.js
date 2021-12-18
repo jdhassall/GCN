@@ -2,7 +2,7 @@ const mysql = require('mysql');
 require('dotenv').config();
 
 // May possibly want to use a JSON dictionary instead of 
-function storeVideoData(retrievedDataArr) {
+function storeVideoData(resultsForStoring) {
   try {
     var con = mysql.createConnection({
       host: process.env.HOST,
@@ -13,16 +13,15 @@ function storeVideoData(retrievedDataArr) {
     con.connect(function(err) {
       if (err) {
         console.log(err);
-        throw err;
+        throw err; // Add in a return statement here to return false with a reason
       } else {
         console.log("Connected!");
-      } // Add in a return statement here to return false with a reason
-      for (var i in retrievedDataArr) {
-        var date = formatDate(retrievedDataArr[i].date)
-        var sqlQuery = `INSERT INTO videos (title, date) VALUES ("${retrievedDataArr[i].title}", "${date}")`;
+      } 
+      for (var i in resultsForStoring) {
+        var date = formatDate(resultsForStoring[i].date)
+        var sqlQuery = `INSERT INTO videos (title, date) VALUES ("${resultsForStoring[i].title}", "${date}")`;
         con.query(sqlQuery, function (err, result) {
           if (err) throw err;
-          // check result.affectedRows == 1 to tell if datbase insertion has happened
           if (result.affectedRows != 1) {
             return false
           };

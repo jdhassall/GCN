@@ -8,66 +8,41 @@ require('dotenv').config();
 router.get('/', retrieveYoutubeData);
 
 // refactor to seperate out functionality
+// Make sure to alter this to return data for the second channel
 async function retrieveYoutubeData(req, res) {
   try {
-    // Make sure to abstract this out
-    // google api
-    let url = `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}&part=snippet&q=GlobalCyclingNetwork`;
+    var resultsForStoring = []
+    // make initial youtube api request
+    const url = `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}&part=snippet&q=GlobalCyclingNetwork`;
     var response = await fetch(url);
-    console.log(response)
     var data = await response.json();
+    var { nextPageToken } = extractRelevantData(data);
 
-    var extractedData = extractRelevantData(data);
-    var nextPageToken = extractedData[0];
-    informationArr = data.items;
-    // console.log(informationArr)
-
-    // for (var key in informationArr) {
-    //   if (informationArr.hasOwnProperty(key)) {
-    //     retrievedDataArr.push({
-    //       title: informationArr[key].snippet.title,
-    //       date: informationArr[key].snippet.publishedAt,
-    //     });
-    //   };
-    // };
-
+    // return rest of paginated results
     while (nextPageToken) {
       console.log(nextPageToken)
       url = `https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}&part=snippet&nextPageToken=${nextPageToken}&q=GlobalCyclingNetwork`;
       response = await fetch(url);
       data = await response.json();
-      var extractedData = extractRelevantData(data);
-      var nextPageToken = extractedData[0];
-      var retrievedDataArr = extractedData[1];
-      // nextPageToken = data.nextPageToken;
-      // informationArr = data.items;
-      // for (var key in informationArr) {
-      //   if (informationArr.hasOwnProperty(key)) {
-      //     retrievedDataArr.push({
-      //       title: informationArr[key].snippet.title,
-      //       date: informationArr[key].snippet.publishedAt,
-      //     });
-      //   };
-      // };
+      var { nextPageToken, retrievedDataArr } = extractRelevantData(data);
     };
-
-    console.log(retrievedDataArr);
-
-
-    // Need to change this to use retrieved data
-    const filteredResults = filterResults(sampleResults);
+    // Filer results for specified terms
+    const filteredResults = filterResults(retrievedDataArr);
     for (var i in filteredResults) {
-      retrievedDataArr.push({
+      resultsForStoring.push({
         title: filteredResults[i].title,
         date: filteredResults[i].publishedAt,
       });    
     };
-    const result = storeVideoData(retrievedDataArr);
-    console.log(result)
-    return res.status(200).json({ status: 'Success', informationUpdatedSuccessfully: true });
-
+    // Handle result of storing data in db
+    const result = storeVideoData(resultsForStoring);
+    if (result) {
+      return res.status(200).json({ status: 'Success', informationUpdatedSuccessfully: true });
+    } else {
+      return res.status(500).json({ status: 'Failed', informationUpdatedSuccessfully: false });
+    }
   } catch (err) {
-    res.status(500).json({ err });
+    res.status(500).json({ status: 'Failed', informationUpdatedSuccessfully: false });
     console.log(err);
   };
 };

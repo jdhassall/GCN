@@ -73,3 +73,30 @@
         responseURL: 'https://youtube.googleapis.com/youtube/v3/search?key=AIzaSyCoYLPef8dWTb9fwcyckZIeesERvg1Vj0Y&part=snippet&q=GlobalCyclingNetwork'
       }
     }
+
+
+
+      // nextPageToken = data.nextPageToken;
+      // informationArr = data.items;
+      // for (var key in informationArr) {
+      //   if (informationArr.hasOwnProperty(key)) {
+      //     retrievedDataArr.push({
+      //       title: informationArr[key].snippet.title,
+      //       date: informationArr[key].snippet.publishedAt,
+      //     });
+      //   };
+      // };
+
+
+          // var nextPageToken = extractedData[0];
+    // informationArr = data.items;
+    // console.log(informationArr)
+
+    // for (var key in informationArr) {
+    //   if (informationArr.hasOwnProperty(key)) {
+    //     retrievedDataArr.push({
+    //       title: informationArr[key].snippet.title,
+    //       date: informationArr[key].snippet.publishedAt,
+    //     });
+    //   };
+    // };

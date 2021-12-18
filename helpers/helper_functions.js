@@ -14,7 +14,6 @@ function extractReleventData(data) {
   var retrievedDataArr = [];
   var nextPageToken = data.nextPageToken;
   var informationArr = data.items;
-  console.log(informationArr)
 
   for (var key in informationArr) {
     if (informationArr.hasOwnProperty(key)) {
@@ -24,7 +23,7 @@ function extractReleventData(data) {
       });
     };
   };
-  return [nextPageToken, retrievedDataArr];
+  return { nextPageToken, retrievedDataArr };
 }
 
 module.exports = {
