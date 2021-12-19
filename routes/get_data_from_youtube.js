@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { storeVideoData } = require('../helpers/database_operations');
+const { storeVideoData } = require('../database/database_operations');
 const fetch = require("node-fetch");
 const { filterResults, extractRelevantData } = require('../helpers/helper_functions');
 require('dotenv').config();
@@ -36,12 +36,12 @@ async function retrieveYoutubeData(req, res) {
     // Handle result of storing data in db
     const result = storeVideoData(resultsForStoring);
     if (result) {
-      return res.status(200).json({ status: 'Success', informationUpdatedSuccessfully: true });
+      return res.status(200).json({ status: 'Success', informationInsertedSuccessfully: true });
     } else {
-      return res.status(500).json({ status: 'Failed', informationUpdatedSuccessfully: false });
+      return res.status(500).json({ status: 'Failed', informationInsertedSuccessfully: false });
     }
   } catch (err) {
-    res.status(500).json({ status: 'Failed', informationUpdatedSuccessfully: false });
+    return res.status(500).json({ status: 'Failed', informationInsertedSuccessfully: false });
     console.log(err);
   };
 };

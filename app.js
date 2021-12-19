@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var { parseSqlFile, initDatabase } = require('./database/databaseInit');
 const youtubeRoute = require('./routes/get_data_from_youtube').router;
-// const moment = require('moment')
+const fetchAllResultsRoute = require('./routes/fetch_results.js').router;
 require('dotenv').config();
 
 
@@ -27,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Add routes here
 app.use('/youtube_data', youtubeRoute);
+app.use('/results', fetchAllResultsRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

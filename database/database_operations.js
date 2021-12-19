@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const { formatDate } = require('./helper_functions');
+const { formatDate } = require('../helpers/helper_functions');
 require('dotenv').config();
 
 // REMEMBER TO CLOSE THE DATABASE CONNECTION
@@ -40,7 +40,6 @@ function closeDatabaseConnection(con) {
   };
 };
 
-// May possibly want to use a JSON dictionary instead of 
 function storeVideoData(resultsForStoring) {
   try {
     var con = mysql.createConnection({
@@ -74,32 +73,8 @@ function storeVideoData(resultsForStoring) {
   };
 };
 
-function fetchAllData() {
-  const con = connectToDatabase();
-  var sqlQuery = `SELECT * FROM videos`;
-  const result = performDatabaseQuery(con, sqlQuery);
-  closeDatabaseConnection(con);
-  if (result) {
-    return result;
-  } else {
-    return false;
-  };
-};
-
-function performDatabaseQuery(con, sqlQuery) {
-  try {
-    con.query(sqlQuery, function (err, result) {
-      if (err) throw err;
-      console.log(result);
-    });
-    return result;
-  } catch (err) {
-    console.log(err)
-    return false;
-  };
-};
-
 module.exports = {
+  closeDatabaseConnection,
+  connectToDatabase,
   storeVideoData,
-  fetchAllData,
 };
