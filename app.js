@@ -5,7 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var { parseSqlFile, initDatabase } = require('./database/databaseInit');
 const youtubeRoute = require('./routes/get_data_from_youtube').router;
-const fetchAllResultsRoute = require('./routes/fetch_results.js').router;
+const fetchAllResultsRoute = require('./routes/fetch_results').router;
+const fetchAllResultByIdRoute = require('./routes/fetch_result_by_id').router;
+const deleteDataByIdRoute = require('./routes/delete_data_by_id').router;
 require('dotenv').config();
 
 
@@ -28,6 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Add routes here
 app.use('/youtube_data', youtubeRoute);
 app.use('/results', fetchAllResultsRoute);
+app.use('/fetch_result_by_id', fetchAllResultByIdRoute);
+app.use('/delete_data_by_id', deleteDataByIdRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
