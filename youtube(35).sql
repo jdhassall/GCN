@@ -24,6 +24,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`videos` (`id` INT NOT NULL AUTO_INCREMENT, `t
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`channels` (`id` INT NOT NULL, `channel_name` VARCHAR(45) NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Convert all title to lower case`
+-- -----------------------------------------------------
+DROP TRIGGER IF EXISTS lowerCaseOnInsert;
+CREATE TRIGGER lowerCaseOnInsert BEFORE INSERT ON `mydb`.`videos` FOR EACH ROW SET NEW.title = LOWER(NEW.title);
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

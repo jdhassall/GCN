@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { connectToDatabase, closeDatabaseConnection } = require('../database/database_operations')
-router.get('/', deleteDataById);
+router.delete('/', deleteDataById);
 
 async function deleteDataById(req, res) {
   try {

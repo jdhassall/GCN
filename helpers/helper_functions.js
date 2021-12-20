@@ -10,11 +10,13 @@ function filterResults(results) {
   return filteredResults;
 };
 
-function extractReleventData(data) {
-  var retrievedDataArr = [];
-  var nextPageToken = data.nextPageToken;
-  var informationArr = data.items;
+function extractReleventData(dataGcn, dataGlobalmtb) {
 
+  var retrievedDataArr = [];
+  var nextPageTokenGcn = data.nextPageToken;
+  var nextPageTokenGlobalmtb = data.nextPageToken;
+  var informationArr = (dataGcn.items).concat(dataGlobalmtb.items);
+  
   for (var key in informationArr) {
     if (informationArr.hasOwnProperty(key)) {
       retrievedDataArr.push({
@@ -23,7 +25,7 @@ function extractReleventData(data) {
       });
     };
   };
-  return { nextPageToken, retrievedDataArr };
+  return { nextPageTokenGcn, nextPageTokenGlobalmtb, retrievedDataArr };
 }
 
 
