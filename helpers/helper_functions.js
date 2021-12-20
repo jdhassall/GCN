@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 function filterResults(results) {
   var filteredResults = []
   const conditions = ["pro", "matt stephens", "5", "Mitchelton-Scott", "Dubai stage"];
@@ -41,8 +43,25 @@ function formatDate(dateToBeFormatted) {
   };
 };
 
+function readFilterCriteriaIn() {
+  try {
+    var data = fs.readFileSync('./search_filter (35)', 'utf8')
+    data = data.split('\n')
+      for(var i in data) {
+        data[i] = data[i].replace(' ', '%20');
+      };
+    return data;
+  } catch (err) {
+    console.log(err);
+    return false;
+  };
+};
+
+
+
 module.exports = {
   formatDate,
   filterResults,
   extractReleventData,
+  readFilterCriteriaIn,
 }

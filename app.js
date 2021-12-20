@@ -11,13 +11,7 @@ const deleteDataByIdRoute = require('./routes/delete_data_by_id').router;
 const fetchByFilterRoute = require('./routes/fetch_by_title_containing').router;
 require('dotenv').config();
 
-
 var app = express();
-
-var i = [{
-  test: 1
-}]
-console.log(i.concat(j))
 
 // Add a connect to database here
 parseSqlFile();
