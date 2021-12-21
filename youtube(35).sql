@@ -12,7 +12,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- Schema mydb
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-GRANT ALL PRIVILEGES ON mydb.* TO 'gcn';
 USE `mydb` ;
 
 -- -----------------------------------------------------

@@ -1,10 +1,10 @@
 const router = require('express').Router();
+const fetch = require('node-fetch');
 const { storeVideoData } = require('../database/database_operations');
-const fetch = require("node-fetch");
 const { extractReleventData, readFilterCriteriaIn } = require('../helpers/helper_functions');
 require('dotenv').config();
 
-router.post('/', retrieveYoutubeData); 
+router.post('/', retrieveYoutubeData);
 
 async function retrieveYoutubeData(req, res) {
   try {
@@ -14,10 +14,11 @@ async function retrieveYoutubeData(req, res) {
     var urlGlobalmtb = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UC_A--fhX5gea0i4UtpD99Gg&q=%22${filters[0]}%22%7C%22${filters[1]}%22%7C%22${filters[2]}%22%7C%22${filters[3]}%22%7C%22${filters[4]}%22&key=${process.env.YOUTUBE_API_KEY}`;
     
     var { dataGcn, dataGlobalmtb } = await fetchDataFromApi(urlGcn, urlGlobalmtb);
+    console.log(dataGcn)
     var { nextPageTokenGcn, nextPageTokenGlobalmtb } = extractReleventData(dataGcn, dataGlobalmtb, retrievedDataArr);
     
     // return rest of paginated results
-    while (nextPageTokenGcn && nextPageTokenGlobalmtb || nextPageTokenGcn || nextPageTokenGlobalmtb) {
+    while ((nextPageTokenGcn && nextPageTokenGlobalmtb) || nextPageTokenGcn || nextPageTokenGlobalmtb) {
       if (nextPageTokenGcn && nextPageTokenGlobalmtb) {
 
         urlGcn = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCuTaETsuCOkJ0H_GAztWt0Q&pageToken=${nextPageTokenGcn}&q=%22${filters[0]}%22%7C%22${filters[1]}%22%7C%22${filters[2]}%22%7C%22${filters[3]}%22%7C%22${filters[4]}%22&key=${process.env.YOUTUBE_API_KEY}`;
@@ -40,7 +41,6 @@ async function retrieveYoutubeData(req, res) {
       };
     };
 
-    // Handle result of storing data in db
     const result = await storeVideoData(retrievedDataArr);
     if (result) {
       return res.status(200).json({ status: 'Success', informationInsertedSuccessfully: true });
@@ -50,8 +50,8 @@ async function retrieveYoutubeData(req, res) {
   } catch (err) {
     console.log(err);
     return res.status(500).json({ status: 'Failed', informationInsertedSuccessfully: false });
-  };
-};
+  }
+}
 
 async function fetchDataFromApi(urlGcn, urlGlobalmtb) {
   try {
@@ -67,9 +67,9 @@ async function fetchDataFromApi(urlGcn, urlGlobalmtb) {
   } catch (err) {
     console.log(err);
     return false;
-  };
-};
+  }
+}
 
 module.exports = {
-    router,
+  router,
 }

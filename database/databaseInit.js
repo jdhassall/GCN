@@ -3,16 +3,16 @@ const fs = require('fs');
 
 function parseSqlFile() {
   try {
-    const fileName = './youtube(35).sql'
-    var sqlData = fs.readFileSync(fileName).toString()
-      .replace(/^\s*--[^.].*/gm, " ") // remove all comments in file
+    const fileName = './youtube(35).sql';
+    const sqlData = fs.readFileSync(fileName).toString()
+      .replace(/^\s*--[^.].*/gm, ' ') // remove all comments in file
       .replace(/\s+/g, ' ') // remove excess white space
       .split(';') // split into all statements
       .map(Function.prototype.call, String.prototype.trim)
       .filter(function(el) {return el.length != 0});
-    return sqlData
+    return sqlData;
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 }
 
@@ -34,13 +34,12 @@ function initDatabase() {
       });
     };
     connection.end();
-    console.log("Database Initialized");
+    console.log('Database Initialized');
   } catch (err) {
     console.log('Could not initialise database... ' + err);
   };
 };
 
 module.exports = {
-  parseSqlFile,
   initDatabase,
 };

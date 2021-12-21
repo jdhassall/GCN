@@ -28,8 +28,8 @@ function extractReleventData(dataGcn, dataGlobalmtb, retrievedDataArr) {
   } catch (err) {
     console.log(err);
     return false;
-  };
-};
+  }
+}
 
 function formatDate(dateToBeFormatted) {
   try{
@@ -40,8 +40,8 @@ function formatDate(dateToBeFormatted) {
   } catch (err) {
     console.log(err)
     return false; 
-  };
-};
+  }
+}
 
 function readFilterCriteriaIn() {
   try {
@@ -54,9 +54,8 @@ function readFilterCriteriaIn() {
   } catch (err) {
     console.log(err);
     return false;
-  };
-};
-
+  }
+}
 
 module.exports = {
   formatDate,

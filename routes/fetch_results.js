@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { connectToDatabase, closeDatabaseConnection } = require('../database/database_operations')
+const { connectToDatabase, closeDatabaseConnection } = require('../database/database_operations');
+
 router.get('/', fetchResults);
 
 async function fetchResults(req, res) {
@@ -22,9 +23,9 @@ async function fetchResults(req, res) {
   } catch (err) {
     console.log(err);
     return res.status(500).json({ status: 'Failed', results: false });
-  };
-};
+  }
+}
 
 module.exports = {
-    router,
+  router,
 }

@@ -1,9 +1,9 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var { initDatabase } = require('./database/databaseInit');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const { initDatabase } = require('./database/databaseInit');
 const youtubeRoute = require('./routes/get_data_from_youtube').router;
 const fetchAllResultsRoute = require('./routes/fetch_results').router;
 const fetchAllResultByIdRoute = require('./routes/fetch_result_by_id').router;
@@ -11,7 +11,7 @@ const deleteDataByIdRoute = require('./routes/delete_data_by_id').router;
 const fetchByFilterRoute = require('./routes/fetch_by_criteria').router;
 require('dotenv').config();
 
-var app = express();
+const app = express();
 
 // Add a connect to database here
 initDatabase();
