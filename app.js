@@ -8,7 +8,7 @@ const youtubeRoute = require('./routes/get_data_from_youtube').router;
 const fetchAllResultsRoute = require('./routes/fetch_results').router;
 const fetchAllResultByIdRoute = require('./routes/fetch_result_by_id').router;
 const deleteDataByIdRoute = require('./routes/delete_data_by_id').router;
-const fetchByFilterRoute = require('./routes/fetch_by_title_containing').router;
+const fetchByFilterRoute = require('./routes/fetch_by_criteria').router;
 require('dotenv').config();
 
 var app = express();

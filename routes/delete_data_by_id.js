@@ -13,7 +13,7 @@ async function deleteDataById(req, res) {
     if (result.affectedRows == 1) {
       return res.status(200).json({ status: 'Success', deleted: true });
     } else {
-      return res.status(200).json({ status: 'Failed', deleted: false });
+      return res.status(500).json({ status: 'Failed', deleted: false });
     };
   });
   closeDatabaseConnection(con);
@@ -25,6 +25,4 @@ async function deleteDataById(req, res) {
 
 module.exports = {
     router,
-    // Make sure to remove if dont get time to unit test
-    deleteDataById,
 }

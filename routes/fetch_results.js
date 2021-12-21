@@ -27,6 +27,4 @@ async function fetchResults(req, res) {
 
 module.exports = {
     router,
-    // Make sure to remove if dont get time to unit test
-    fetchResults,
 }

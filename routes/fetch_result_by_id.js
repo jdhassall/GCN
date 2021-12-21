@@ -4,6 +4,7 @@ router.get('/', fetchResultById);
 
 async function fetchResultById(req, res) {
   try {
+    console.log('~HIT~')
     // perform db query
     const con = connectToDatabase();
     var sqlQuery = `SELECT * FROM videos WHERE id=${req.body.id}`;
@@ -25,6 +26,4 @@ async function fetchResultById(req, res) {
 
 module.exports = {
     router,
-    // Make sure to remove if dont get time to unit test
-    fetchResultById,
 }

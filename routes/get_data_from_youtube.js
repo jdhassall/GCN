@@ -13,7 +13,6 @@ async function retrieveYoutubeData(req, res) {
     var urlGcn = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCuTaETsuCOkJ0H_GAztWt0Q&q=%22${filters[0]}%22%7C%22${filters[1]}%22%7C%22${filters[2]}%22%7C%22${filters[3]}%22%7C%22${filters[4]}%22&key=${process.env.YOUTUBE_API_KEY}`;
     var urlGlobalmtb = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UC_A--fhX5gea0i4UtpD99Gg&q=%22${filters[0]}%22%7C%22${filters[1]}%22%7C%22${filters[2]}%22%7C%22${filters[3]}%22%7C%22${filters[4]}%22&key=${process.env.YOUTUBE_API_KEY}`;
     
-    // Do if (!result) return 500 for all relevent places
     var { dataGcn, dataGlobalmtb } = await fetchDataFromApi(urlGcn, urlGlobalmtb);
     var { nextPageTokenGcn, nextPageTokenGlobalmtb } = extractReleventData(dataGcn, dataGlobalmtb, retrievedDataArr);
     
@@ -73,5 +72,4 @@ async function fetchDataFromApi(urlGcn, urlGlobalmtb) {
 
 module.exports = {
     router,
-    retrieveYoutubeData,
 }
