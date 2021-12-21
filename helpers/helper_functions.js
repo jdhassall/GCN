@@ -31,7 +31,6 @@ function extractReleventData(dataGcn, dataGlobalmtb, retrievedDataArr) {
   };
 };
 
-
 function formatDate(dateToBeFormatted) {
   try{
     var date = new Date(dateToBeFormatted) 
@@ -57,7 +56,6 @@ function readFilterCriteriaIn() {
     return false;
   };
 };
-
 
 
 module.exports = {

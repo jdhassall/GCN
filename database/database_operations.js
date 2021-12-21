@@ -2,7 +2,6 @@ const mysql = require('mysql');
 const { formatDate } = require('../helpers/helper_functions');
 require('dotenv').config();
 
-// REMEMBER TO CLOSE THE DATABASE CONNECTION
 
 function connectToDatabase() {
   try {
@@ -14,8 +13,7 @@ function connectToDatabase() {
     });
     con.connect(function(err) {
       if (err) {
-        console.log(err);
-        throw err; // Add in a return statement here to return false with a reason
+        throw err; 
       } else {
         console.log("Connected!");
       };

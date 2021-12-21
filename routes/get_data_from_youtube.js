@@ -4,11 +4,8 @@ const fetch = require("node-fetch");
 const { extractReleventData, readFilterCriteriaIn } = require('../helpers/helper_functions');
 require('dotenv').config();
 
-router.post('/', retrieveYoutubeData); // GET is incorrect! Change this! More likely put or post or something
+router.post('/', retrieveYoutubeData); 
 
-// USE YOUTUBE SEARCH LIST PARAMETER TO FILTER RESULTS
-// refactor to seperate out functionality
-// Make sure to alter this to return data for the second channel
 async function retrieveYoutubeData(req, res) {
   try {
     var retrievedDataArr = [];

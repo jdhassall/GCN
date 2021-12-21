@@ -1,6 +1,5 @@
 const mysql = require('mysql');
 const fs = require('fs');
-const readline = require('readline');
 
 function parseSqlFile() {
   try {
