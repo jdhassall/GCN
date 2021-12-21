@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var { parseSqlFile, initDatabase } = require('./database/databaseInit');
+var { initDatabase } = require('./database/databaseInit');
 const youtubeRoute = require('./routes/get_data_from_youtube').router;
 const fetchAllResultsRoute = require('./routes/fetch_results').router;
 const fetchAllResultByIdRoute = require('./routes/fetch_result_by_id').router;
@@ -14,7 +14,6 @@ require('dotenv').config();
 var app = express();
 
 // Add a connect to database here
-parseSqlFile();
 initDatabase();
 
 // view engine setup

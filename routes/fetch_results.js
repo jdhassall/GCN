@@ -4,7 +4,6 @@ router.get('/', fetchResults);
 
 async function fetchResults(req, res) {
   try {
-      console.log('HIT')
   // perform db query
   const con = connectToDatabase();
   var sqlQuery = `SELECT * FROM videos`;

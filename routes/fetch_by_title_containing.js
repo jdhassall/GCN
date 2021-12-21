@@ -1,13 +1,14 @@
 const router = require('express').Router();
 const { connectToDatabase, closeDatabaseConnection } = require('../database/database_operations')
 router.get('/', fetchByFilterCriteria);
-const fs = require('fs');
 
 async function fetchByFilterCriteria(req, res) {
   try {
     // perform db query
+    const searchTerm = req.body.searchTerm.toLowerCase();
+    
     const con = connectToDatabase();
-    var sqlQuery = `SELECT id, title FROM videos WHERE (title LIKE '%${req.body.searchTerm}%')`;
+    var sqlQuery = `SELECT id, title FROM videos WHERE (title LIKE '%${searchTerm}%')`;
     await con.query(sqlQuery, function (err, rows) {
       if (err) throw err;
       // check results
